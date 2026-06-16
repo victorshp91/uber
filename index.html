@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Landing page de contacto para Victor Saint Hilaire, chofer privado de confianza.">
+  <meta name="theme-color" content="#121212">
+  <title>Victor Saint Hilaire | Chofer Privado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #121212;
+      --surface: #191919;
+      --surface-soft: #202020;
+      --surface-lift: #272727;
+      --text: #ffffff;
+      --text-muted: #b8b8b8;
+      --accent: #6ee7b7;
+      --accent-strong: #34d399;
+      --accent-blue: #93c5fd;
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(110, 231, 183, 0.16), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(147, 197, 253, 0.12), transparent 32%),
+        var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      width: min(100%, 480px);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 16px 34px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      padding: 24px 18px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(25, 25, 25, 0.94), rgba(18, 18, 18, 0.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 8px 8px 22px;
+    }
+
+    .language-switcher {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .language-button {
+      min-width: 44px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .language-button.is-active {
+      border-color: rgba(110, 231, 183, 0.55);
+      background: rgba(110, 231, 183, 0.14);
+      color: var(--text);
+    }
+
+    .language-button:focus-visible {
+      outline: 3px solid rgba(110, 231, 183, 0.4);
+      outline-offset: 3px;
+    }
+
+    .avatar-wrap {
+      width: 118px;
+      height: 118px;
+      padding: 4px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      box-shadow: 0 14px 32px rgba(110, 231, 183, 0.16);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 4px solid var(--surface);
+      border-radius: inherit;
+      object-fit: cover;
+    }
+
+    .eyebrow {
+      margin-top: 18px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-top: 6px;
+      font-size: clamp(2rem, 12vw, 3.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+    }
+
+    .subtitle {
+      max-width: 280px;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      font-weight: 500;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section-title {
+      margin-bottom: 10px;
+      padding-left: 4px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .button-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      touch-action: manipulation;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:active {
+      transform: scale(0.975);
+      background: var(--surface-lift);
+    }
+
+    .button:focus-visible {
+      outline: 3px solid rgba(110, 231, 183, 0.4);
+      outline-offset: 3px;
+    }
+
+    .button-primary {
+      min-height: 66px;
+      justify-content: center;
+      margin-top: 6px;
+      border-color: rgba(110, 231, 183, 0.45);
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #06130f;
+      box-shadow: 0 18px 32px rgba(52, 211, 153, 0.2);
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+
+    .button-primary:active {
+      background: linear-gradient(135deg, #2bbf87, #5fdca9);
+    }
+
+    .button-icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.92rem;
+    }
+
+    .button-text {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .button-label {
+      line-height: 1.2;
+    }
+
+    .button-hint {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .button-arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+      transition: transform 180ms ease;
+    }
+
+    .button:active .button-arrow {
+      transform: translateX(2px);
+    }
+
+    .whatsapp {
+      border-color: rgba(110, 231, 183, 0.26);
+    }
+
+    .qr-card {
+      margin-top: 20px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.045);
+      text-align: center;
+    }
+
+    .qr-title {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .qr-text {
+      margin: 4px auto 14px;
+      max-width: 250px;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+    }
+
+    #qrcode {
+      width: 152px;
+      height: 152px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+    }
+
+    #qrcode img,
+    #qrcode canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    @media (hover: hover) {
+      .language-button:hover {
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.09);
+      }
+
+      .button:hover {
+        border-color: rgba(255, 255, 255, 0.18);
+        background: var(--surface-lift);
+        transform: translateY(-1px);
+      }
+
+      .button-primary:hover {
+        border-color: rgba(110, 231, 183, 0.7);
+        background: linear-gradient(135deg, #46e2a2, #8cf0c6);
+      }
+    }
+
+    @media (min-width: 390px) {
+      .page {
+        padding-inline: 20px;
+      }
+
+      .card {
+        padding: 28px 22px 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <article class="card" aria-label="Tarjeta digital de Victor Saint Hilaire" data-i18n-aria="cardLabel">
+      <div class="language-switcher" aria-label="Selector de idioma" data-i18n-aria="languageSelector">
+        <button class="language-button is-active" type="button" data-language="es" aria-pressed="true">ES</button>
+        <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+      <header class="profile">
+        <div class="avatar-wrap" aria-hidden="true">
+          <img
+            class="avatar"
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80"
+            alt=""
+          >
+        </div>
+        <p class="eyebrow" data-i18n="eyebrow">Servicio premium</p>
+        <h1>Victor Saint Hilaire</h1>
+        <p class="subtitle" data-i18n="subtitle">Tu chofer privado de confianza</p>
+      </header>
+
+      <a class="button button-primary" href="contacto.vcf" download>
+        <span data-i18n="saveContact">Guardar contacto</span>
+      </a>
+
+      <section class="section" aria-labelledby="payment-title">
+        <h2 class="section-title" id="payment-title" data-i18n="paymentsTitle">Pagos y propinas</h2>
+        <div class="button-grid">
+          <a class="button" href="tel:+13476478838" aria-label="Enviar pago por Zelle al 347 647 8838" data-i18n-aria="zelleAria">
+            <span class="button-icon" aria-hidden="true">Z</span>
+            <span class="button-text">
+              <span class="button-label">Zelle</span>
+              <span class="button-hint" data-i18n="zelleHint">347 647 8838</span>
+            </span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a class="button" href="https://cash.app/" target="_blank" rel="noopener noreferrer" aria-label="Enviar pago por Cash App" data-i18n-aria="cashAppAria">
+            <span class="button-icon" aria-hidden="true">$</span>
+            <span class="button-text">
+              <span class="button-label">Cash App</span>
+              <span class="button-hint" data-i18n="cashAppHint">Envía en segundos</span>
+            </span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="contact-title">
+        <h2 class="section-title" id="contact-title" data-i18n="contactTitle">Comunicación</h2>
+        <a
+          class="button whatsapp"
+          href="https://wa.me/13476478838?text=Hola%20Victor%2C%20me%20gustar%C3%ADa%20coordinar%20un%20viaje."
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Iniciar chat de WhatsApp con Victor Saint Hilaire"
+          data-i18n-aria="whatsappAria"
+        >
+          <span class="button-icon" aria-hidden="true">WA</span>
+          <span class="button-text">
+            <span class="button-label">WhatsApp</span>
+            <span class="button-hint" data-i18n="whatsappHint">Escríbeme directamente</span>
+          </span>
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </a>
+      </section>
+
+      <section class="qr-card" aria-labelledby="qr-title">
+        <h2 class="qr-title" id="qr-title" data-i18n="qrTitle">Comparte mi contacto</h2>
+        <p class="qr-text" data-i18n="qrText">Escanea este código para abrir esta tarjeta digital.</p>
+        <div id="qrcode" aria-label="Código QR de la página actual" data-i18n-aria="qrAria"></div>
+      </section>
+
+      <p class="footer" data-i18n="footer">Disponible para viajes privados, aeropuerto y traslados ejecutivos.</p>
+    </article>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" referrerpolicy="no-referrer"></script>
+  <script>
+    var translations = {
+      es: {
+        pageTitle: "Victor Saint Hilaire | Chofer Privado",
+        cardLabel: "Tarjeta digital de Victor Saint Hilaire",
+        languageSelector: "Selector de idioma",
+        eyebrow: "Servicio premium",
+        subtitle: "Tu chofer privado de confianza",
+        saveContact: "Guardar contacto",
+        paymentsTitle: "Pagos y propinas",
+        zelleHint: "347 647 8838",
+        zelleAria: "Enviar pago por Zelle al 347 647 8838",
+        cashAppHint: "Envía en segundos",
+        cashAppAria: "Enviar pago por Cash App",
+        contactTitle: "Comunicación",
+        whatsappHint: "Escríbeme directamente",
+        whatsappAria: "Iniciar chat de WhatsApp con Victor Saint Hilaire",
+        qrTitle: "Comparte mi contacto",
+        qrText: "Escanea este código para abrir esta tarjeta digital.",
+        qrAria: "Código QR de la página actual",
+        footer: "Disponible para viajes privados, aeropuerto y traslados ejecutivos."
+      },
+      en: {
+        pageTitle: "Victor Saint Hilaire | Private Driver",
+        cardLabel: "Digital card for Victor Saint Hilaire",
+        languageSelector: "Language selector",
+        eyebrow: "Premium service",
+        subtitle: "Your trusted private driver",
+        saveContact: "Save contact",
+        paymentsTitle: "Payments and tips",
+        zelleHint: "347 647 8838",
+        zelleAria: "Send Zelle payment to 347 647 8838",
+        cashAppHint: "Send in seconds",
+        cashAppAria: "Send payment with Cash App",
+        contactTitle: "Communication",
+        whatsappHint: "Message me directly",
+        whatsappAria: "Start a WhatsApp chat with Victor Saint Hilaire",
+        qrTitle: "Share my contact",
+        qrText: "Scan this code to open this digital card.",
+        qrAria: "QR code for the current page",
+        footer: "Available for private rides, airport trips, and executive transfers."
+      }
+    };
+
+    function setLanguage(language) {
+      var dictionary = translations[language] || translations.es;
+
+      document.documentElement.lang = language;
+      document.title = dictionary.pageTitle;
+
+      document.querySelectorAll("[data-i18n]").forEach(function (element) {
+        var key = element.getAttribute("data-i18n");
+        element.textContent = dictionary[key];
+      });
+
+      document.querySelectorAll("[data-i18n-aria]").forEach(function (element) {
+        var key = element.getAttribute("data-i18n-aria");
+        element.setAttribute("aria-label", dictionary[key]);
+      });
+
+      document.querySelectorAll("[data-language]").forEach(function (button) {
+        var isActive = button.getAttribute("data-language") === language;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+
+      try {
+        window.localStorage.setItem("preferredLanguage", language);
+      } catch (error) {
+        // Browsers can block storage in private contexts; the selector still works.
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", function () {
+      var target = document.getElementById("qrcode");
+      var savedLanguage = "es";
+
+      try {
+        savedLanguage = window.localStorage.getItem("preferredLanguage") || "es";
+      } catch (error) {
+        savedLanguage = "es";
+      }
+
+      document.querySelectorAll("[data-language]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          setLanguage(button.getAttribute("data-language"));
+        });
+      });
+
+      setLanguage(savedLanguage);
+
+      if (target && window.QRCode) {
+        new QRCode(target, {
+          text: window.location.href,
+          width: 132,
+          height: 132,
+          colorDark: "#121212",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    });
+  </script>
+</body>
+</html>
