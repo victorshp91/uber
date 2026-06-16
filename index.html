@@ -87,21 +87,39 @@
     }
 
     .language-switcher {
-      display: flex;
-      justify-content: flex-end;
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .language-title {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .language-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 10px;
     }
 
     .language-button {
-      min-width: 44px;
-      padding: 8px 10px;
+      min-height: 46px;
+      padding: 10px 12px;
       border: 1px solid var(--border);
-      border-radius: 999px;
+      border-radius: 14px;
       background: rgba(255, 255, 255, 0.06);
       color: var(--text-muted);
       font: inherit;
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
       transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
@@ -358,8 +376,11 @@
   <main class="page">
     <article class="card" aria-label="Tarjeta digital de Victor Saint Hilaire" data-i18n-aria="cardLabel">
       <div class="language-switcher" aria-label="Selector de idioma" data-i18n-aria="languageSelector">
-        <button class="language-button is-active" type="button" data-language="es" aria-pressed="true">ES</button>
-        <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
+        <p class="language-title">Idioma / Language</p>
+        <div class="language-options">
+          <button class="language-button is-active" type="button" data-language="es" aria-pressed="true">Español</button>
+          <button class="language-button" type="button" data-language="en" aria-pressed="false">English</button>
+        </div>
       </div>
       <header class="profile">
         <div class="avatar-wrap" aria-hidden="true">
@@ -426,6 +447,7 @@
           rel="noopener noreferrer"
           aria-label="Iniciar chat de WhatsApp con Victor Saint Hilaire"
           data-i18n-aria="whatsappAria"
+          data-i18n-href="whatsappUrl"
         >
           <span class="button-icon" aria-hidden="true">WA</span>
           <span class="button-text">
@@ -471,6 +493,7 @@
         contactTitle: "Comunicación",
         whatsappHint: "Escríbeme directamente",
         whatsappAria: "Iniciar chat de WhatsApp con Victor Saint Hilaire",
+        whatsappUrl: "https://wa.me/13476478838?text=Hola%20Victor%2C%20me%20gustar%C3%ADa%20coordinar%20un%20viaje.",
         qrTitle: "Comparte mi contacto",
         qrText: "Escanea este código para abrir esta tarjeta digital.",
         qrAria: "Código QR de la página actual",
@@ -498,6 +521,7 @@
         contactTitle: "Communication",
         whatsappHint: "Message me directly",
         whatsappAria: "Start a WhatsApp chat with Victor Saint Hilaire",
+        whatsappUrl: "https://wa.me/13476478838?text=Hi%20Victor%2C%20I%20would%20like%20to%20schedule%20a%20ride.",
         qrTitle: "Share my contact",
         qrText: "Scan this code to open this digital card.",
         qrAria: "QR code for the current page",
@@ -519,6 +543,11 @@
       document.querySelectorAll("[data-i18n-aria]").forEach(function (element) {
         var key = element.getAttribute("data-i18n-aria");
         element.setAttribute("aria-label", dictionary[key]);
+      });
+
+      document.querySelectorAll("[data-i18n-href]").forEach(function (element) {
+        var key = element.getAttribute("data-i18n-href");
+        element.setAttribute("href", dictionary[key]);
       });
 
       document.querySelectorAll("[data-language]").forEach(function (button) {
