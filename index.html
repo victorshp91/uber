@@ -164,6 +164,11 @@
       margin-top: 18px;
     }
 
+    .action-grid {
+      display: grid;
+      gap: 12px;
+    }
+
     .section-title {
       margin-bottom: 10px;
       padding-left: 4px;
@@ -190,8 +195,10 @@
       border-radius: var(--radius-md);
       background: var(--surface-soft);
       color: var(--text);
+      font: inherit;
       font-size: 1rem;
       font-weight: 700;
+      cursor: pointer;
       touch-action: manipulation;
       transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
     }
@@ -209,7 +216,6 @@
     .button-primary {
       min-height: 66px;
       justify-content: center;
-      margin-top: 6px;
       border-color: rgba(110, 231, 183, 0.45);
       background: linear-gradient(135deg, var(--accent-strong), var(--accent));
       color: #06130f;
@@ -368,9 +374,25 @@
         <p class="subtitle" data-i18n="subtitle">Tu chofer privado de confianza</p>
       </header>
 
-      <a class="button button-primary" href="contacto.vcf" download>
-        <span data-i18n="saveContact">Guardar contacto</span>
-      </a>
+      <div class="action-grid">
+        <a class="button button-primary" href="contacto.vcf" download>
+          <span data-i18n="saveContact">Guardar contacto</span>
+        </a>
+        <button
+          class="button"
+          id="share-button"
+          type="button"
+          aria-label="Compartir esta página"
+          data-i18n-aria="shareAria"
+        >
+          <span class="button-icon" aria-hidden="true">↗</span>
+          <span class="button-text">
+            <span class="button-label" data-i18n="sharePage">Compartir página</span>
+            <span class="button-hint" data-i18n="shareHint">Enviar esta tarjeta a otra persona</span>
+          </span>
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
 
       <section class="section" aria-labelledby="payment-title">
         <h2 class="section-title" id="payment-title" data-i18n="paymentsTitle">Pagos y propinas</h2>
@@ -434,6 +456,13 @@
         eyebrow: "Servicio premium",
         subtitle: "Tu chofer privado de confianza",
         saveContact: "Guardar contacto",
+        sharePage: "Compartir página",
+        shareHint: "Enviar esta tarjeta a otra persona",
+        shareAria: "Compartir esta página",
+        shareTitle: "Contacto de Victor Saint Hilaire",
+        shareText: "Aquí está la tarjeta de contacto de Victor Saint Hilaire.",
+        linkCopied: "Enlace copiado",
+        copyError: "Copia el enlace desde la barra del navegador",
         paymentsTitle: "Pagos y propinas",
         zelleHint: "347 647 8838",
         zelleAria: "Enviar pago por Zelle al 347 647 8838",
@@ -454,6 +483,13 @@
         eyebrow: "Premium service",
         subtitle: "Your trusted private driver",
         saveContact: "Save contact",
+        sharePage: "Share page",
+        shareHint: "Send this card to someone else",
+        shareAria: "Share this page",
+        shareTitle: "Victor Saint Hilaire contact",
+        shareText: "Here is Victor Saint Hilaire's contact card.",
+        linkCopied: "Link copied",
+        copyError: "Copy the link from the browser bar",
         paymentsTitle: "Payments and tips",
         zelleHint: "347 647 8838",
         zelleAria: "Send Zelle payment to 347 647 8838",
@@ -498,8 +534,56 @@
       }
     }
 
+    function getCurrentLanguage() {
+      return document.documentElement.lang === "en" ? "en" : "es";
+    }
+
+    function showShareMessage(message) {
+      var shareLabel = document.querySelector("#share-button [data-i18n='sharePage']");
+
+      if (!shareLabel) {
+        return;
+      }
+
+      shareLabel.textContent = message;
+
+      window.setTimeout(function () {
+        shareLabel.textContent = translations[getCurrentLanguage()].sharePage;
+      }, 2200);
+    }
+
+    function sharePage() {
+      var dictionary = translations[getCurrentLanguage()];
+      var shareData = {
+        title: dictionary.shareTitle,
+        text: dictionary.shareText,
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch(function () {
+          return;
+        });
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareData.url)
+          .then(function () {
+            showShareMessage(dictionary.linkCopied);
+          })
+          .catch(function () {
+            showShareMessage(dictionary.copyError);
+          });
+        return;
+      }
+
+      showShareMessage(dictionary.copyError);
+    }
+
     window.addEventListener("DOMContentLoaded", function () {
       var target = document.getElementById("qrcode");
+      var shareButton = document.getElementById("share-button");
       var savedLanguage = "es";
 
       try {
@@ -513,6 +597,10 @@
           setLanguage(button.getAttribute("data-language"));
         });
       });
+
+      if (shareButton) {
+        shareButton.addEventListener("click", sharePage);
+      }
 
       setLanguage(savedLanguage);
 
