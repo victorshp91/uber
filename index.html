@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Landing page de contacto para Victor Saint Hilaire, chofer privado de confianza.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Landing page de contacto para Victor Saint Hilaire, chofer privado de confianza." id="meta-description">
   <meta name="theme-color" content="#121212">
   <title>Victor Saint Hilaire | Chofer Privado</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +37,7 @@
       min-height: 100%;
       background: var(--bg);
       scroll-behavior: smooth;
+      color-scheme: dark;
     }
 
     body {
@@ -61,8 +62,13 @@
     .page {
       width: min(100%, 480px);
       min-height: 100vh;
+      min-height: 100dvh;
       margin: 0 auto;
-      padding: 24px 16px 34px;
+      padding:
+        max(16px, env(safe-area-inset-top))
+        max(16px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
       display: flex;
       align-items: stretch;
       justify-content: center;
@@ -154,8 +160,37 @@
       object-fit: cover;
     }
 
+    .license-badge {
+      margin-top: 14px;
+      padding: 8px 14px;
+      border: 1px solid rgba(110, 231, 183, 0.28);
+      border-radius: 999px;
+      background: rgba(110, 231, 183, 0.08);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .license-label {
+      display: block;
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .license-number {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
     .eyebrow {
-      margin-top: 18px;
+      margin-top: 14px;
       color: var(--accent);
       font-size: 0.78rem;
       font-weight: 700;
@@ -185,6 +220,18 @@
     .action-grid {
       display: grid;
       gap: 12px;
+      margin-top: 4px;
+    }
+
+    .action-grid .button,
+    .action-grid .button-primary {
+      width: 100%;
+    }
+
+    .action-grid .button-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .section-title {
@@ -289,6 +336,178 @@
       border-color: rgba(110, 231, 183, 0.26);
     }
 
+    .booking-card {
+      padding: 16px;
+      border: 1px solid rgba(110, 231, 183, 0.22);
+      border-radius: var(--radius-md);
+      background: rgba(110, 231, 183, 0.06);
+    }
+
+    .booking-section {
+      scroll-margin-top: 12px;
+    }
+
+    .booking-text {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .booking-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-label {
+      padding-left: 2px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      min-height: 56px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface-soft);
+      color: var(--text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.35;
+      touch-action: manipulation;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: 3px solid rgba(110, 231, 183, 0.35);
+      border-color: rgba(110, 231, 183, 0.45);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(184, 184, 184, 0.72);
+    }
+
+    .form-input[type="date"],
+    .form-input[type="time"] {
+      min-height: 56px;
+      padding-right: 12px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .booking-form-footer {
+      position: sticky;
+      bottom: max(8px, env(safe-area-inset-bottom));
+      z-index: 3;
+      margin-top: 4px;
+      padding-top: 10px;
+      background: linear-gradient(180deg, rgba(18, 28, 24, 0), rgba(18, 28, 24, 0.92) 28%, rgba(18, 28, 24, 0.98));
+    }
+
+    .booking-submit {
+      width: 100%;
+      min-height: 58px;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .address-field-wrap {
+      position: relative;
+    }
+
+    .address-hint {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .address-suggestions {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      z-index: 25;
+      max-height: min(280px, 42vh);
+      overflow-y: auto;
+      border: 1px solid rgba(110, 231, 183, 0.28);
+      border-radius: 16px;
+      background: var(--surface-lift);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.42);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .address-suggestions[hidden] {
+      display: none !important;
+    }
+
+    .address-suggestion,
+    .address-suggestion-status {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: 15px;
+      text-align: left;
+      line-height: 1.35;
+    }
+
+    .address-suggestion {
+      min-height: 54px;
+      cursor: pointer;
+      touch-action: manipulation;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .address-suggestion:last-child {
+      border-bottom: none;
+    }
+
+    .address-suggestion:active,
+    .address-suggestion.is-active {
+      background: rgba(110, 231, 183, 0.12);
+    }
+
+    .address-suggestion-meta {
+      margin-top: 3px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .address-suggestion-status {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
     .qr-card {
       margin-top: 20px;
       padding: 18px;
@@ -352,13 +571,34 @@
       }
     }
 
+    @media (min-width: 420px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (min-width: 390px) {
       .page {
-        padding-inline: 20px;
+        padding-inline: max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-left));
       }
 
       .card {
         padding: 28px 22px 22px;
+      }
+    }
+
+    @media (max-width: 419px) {
+      .card {
+        padding: 20px 14px 16px;
+        border-radius: 22px;
+      }
+
+      .booking-card {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: clamp(1.85rem, 10vw, 2.6rem);
       }
     }
 
@@ -376,7 +616,7 @@
   <main class="page">
     <article class="card" aria-label="Tarjeta digital de Victor Saint Hilaire" data-i18n-aria="cardLabel">
       <div class="language-switcher" aria-label="Selector de idioma" data-i18n-aria="languageSelector">
-        <p class="language-title">Idioma / Language</p>
+        <p class="language-title" data-i18n="languageTitle">Idioma</p>
         <div class="language-options">
           <button class="language-button is-active" type="button" data-language="es" aria-pressed="true">Español</button>
           <button class="language-button" type="button" data-language="en" aria-pressed="false">English</button>
@@ -386,17 +626,22 @@
         <div class="avatar-wrap" aria-hidden="true">
           <img
             class="avatar"
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80"
-            alt=""
+            src="1.jpeg"
+            alt="Victor Saint Hilaire"
+            data-i18n-alt="avatarAlt"
           >
         </div>
+        <p class="license-badge">
+          <span class="license-label" data-i18n="licenseLabel">Licencia TLC</span>
+          <span class="license-number">5991847</span>
+        </p>
         <p class="eyebrow" data-i18n="eyebrow">Servicio premium</p>
         <h1>Victor Saint Hilaire</h1>
         <p class="subtitle" data-i18n="subtitle">Tu chofer privado de confianza</p>
       </header>
 
       <div class="action-grid">
-        <a class="button button-primary" href="contacto.vcf" download>
+        <a class="button button-primary" href="contacto.vcf" download data-i18n-href="contactFile">
           <span data-i18n="saveContact">Guardar contacto</span>
         </a>
         <button
@@ -415,6 +660,95 @@
         </button>
       </div>
 
+      <section class="section booking-section" id="agendar" aria-labelledby="booking-title">
+        <h2 class="section-title" id="booking-title" data-i18n="bookingTitle">Agendar recogida</h2>
+        <div class="booking-card">
+          <p class="booking-text" data-i18n="bookingText">Completa el formulario y te llevaremos a WhatsApp para confirmar tu viaje.</p>
+          <form class="booking-form" id="booking-form" novalidate>
+            <div class="form-field">
+              <label class="form-label" for="booking-name" data-i18n="bookingNameLabel">Nombre</label>
+              <input
+                class="form-input"
+                id="booking-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                autocapitalize="words"
+                enterkeyhint="next"
+                required
+                data-i18n-placeholder="bookingNamePlaceholder"
+                data-i18n-validity="fieldRequired"
+              >
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="booking-phone" data-i18n="bookingPhoneLabel">Teléfono</label>
+              <input
+                class="form-input"
+                id="booking-phone"
+                name="phone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                enterkeyhint="next"
+                required
+                data-i18n-placeholder="bookingPhonePlaceholder"
+                data-i18n-validity="phoneRequired"
+              >
+            </div>
+            <div class="form-field address-field-wrap">
+              <label class="form-label" for="booking-address" data-i18n="bookingAddressLabel">Dirección de recogida</label>
+              <p class="address-hint" data-i18n="addressHint">Escribe y selecciona una dirección en EE.UU.</p>
+              <input
+                class="form-input"
+                id="booking-address"
+                name="address"
+                type="text"
+                autocomplete="off"
+                autocapitalize="words"
+                enterkeyhint="next"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-controls="address-suggestions"
+                required
+                data-i18n-placeholder="bookingAddressPlaceholder"
+                data-i18n-validity="fieldRequired"
+              >
+              <div class="address-suggestions" id="address-suggestions" role="listbox" hidden></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="booking-date" data-i18n="bookingDateLabel">Día</label>
+                <input
+                  class="form-input"
+                  id="booking-date"
+                  name="date"
+                  type="date"
+                  enterkeyhint="next"
+                  required
+                  data-i18n-validity="fieldRequired"
+                >
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="booking-time" data-i18n="bookingTimeLabel">Hora</label>
+                <input
+                  class="form-input"
+                  id="booking-time"
+                  name="time"
+                  type="time"
+                  enterkeyhint="done"
+                  required
+                  data-i18n-validity="fieldRequired"
+                >
+              </div>
+            </div>
+            <div class="booking-form-footer">
+              <button class="button button-primary booking-submit" type="submit" data-i18n="bookingSubmit">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
       <section class="section" aria-labelledby="payment-title">
         <h2 class="section-title" id="payment-title" data-i18n="paymentsTitle">Pagos y propinas</h2>
         <div class="button-grid">
@@ -427,11 +761,11 @@
             <span class="button-arrow" aria-hidden="true">→</span>
           </a>
 
-          <a class="button" href="https://cash.app/" target="_blank" rel="noopener noreferrer" aria-label="Enviar pago por Cash App" data-i18n-aria="cashAppAria">
+          <a class="button" href="https://cash.app/$victor29dsp" target="_blank" rel="noopener noreferrer" aria-label="Enviar pago por Cash App a $victor29dsp" data-i18n-aria="cashAppAria">
             <span class="button-icon" aria-hidden="true">$</span>
             <span class="button-text">
               <span class="button-label">Cash App</span>
-              <span class="button-hint" data-i18n="cashAppHint">Envía en segundos</span>
+              <span class="button-hint" data-i18n="cashAppHint">$victor29dsp</span>
             </span>
             <span class="button-arrow" aria-hidden="true">→</span>
           </a>
@@ -440,22 +774,38 @@
 
       <section class="section" aria-labelledby="contact-title">
         <h2 class="section-title" id="contact-title" data-i18n="contactTitle">Comunicación</h2>
-        <a
-          class="button whatsapp"
-          href="https://wa.me/13476478838?text=Hola%20Victor%2C%20me%20gustar%C3%ADa%20coordinar%20un%20viaje."
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Iniciar chat de WhatsApp con Victor Saint Hilaire"
-          data-i18n-aria="whatsappAria"
-          data-i18n-href="whatsappUrl"
-        >
-          <span class="button-icon" aria-hidden="true">WA</span>
-          <span class="button-text">
-            <span class="button-label">WhatsApp</span>
-            <span class="button-hint" data-i18n="whatsappHint">Escríbeme directamente</span>
-          </span>
-          <span class="button-arrow" aria-hidden="true">→</span>
-        </a>
+        <div class="button-grid">
+          <a
+            class="button whatsapp"
+            href="https://wa.me/13476478838?text=Hola%20Victor%2C%20me%20gustar%C3%ADa%20coordinar%20un%20viaje."
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Iniciar chat de WhatsApp con Victor Saint Hilaire"
+            data-i18n-aria="whatsappAria"
+            data-i18n-href="whatsappUrl"
+          >
+            <span class="button-icon" aria-hidden="true">WA</span>
+            <span class="button-text">
+              <span class="button-label">WhatsApp</span>
+              <span class="button-hint" data-i18n="whatsappHint">Escríbeme directamente</span>
+            </span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a
+            class="button"
+            href="mailto:victor29dsp@gmail.com"
+            aria-label="Enviar correo a victor29dsp@gmail.com"
+            data-i18n-aria="emailAria"
+          >
+            <span class="button-icon" aria-hidden="true">@</span>
+            <span class="button-text">
+              <span class="button-label" data-i18n="emailLabel">Correo electrónico</span>
+              <span class="button-hint">victor29dsp@gmail.com</span>
+            </span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
       </section>
 
       <section class="qr-card" aria-labelledby="qr-title">
@@ -473,10 +823,17 @@
     var translations = {
       es: {
         pageTitle: "Victor Saint Hilaire | Chofer Privado",
+        pageDescription: "Tarjeta de contacto de Victor Saint Hilaire, chofer privado de confianza.",
         cardLabel: "Tarjeta digital de Victor Saint Hilaire",
         languageSelector: "Selector de idioma",
+        languageTitle: "Idioma",
+        avatarAlt: "Foto de Victor Saint Hilaire",
+        contactFile: "contacto.vcf",
+        fieldRequired: "Completa este campo.",
+        phoneRequired: "Ingresa un número de teléfono válido.",
         eyebrow: "Servicio premium",
         subtitle: "Tu chofer privado de confianza",
+        licenseLabel: "Licencia TLC",
         saveContact: "Guardar contacto",
         sharePage: "Compartir página",
         shareHint: "Enviar esta tarjeta a otra persona",
@@ -485,14 +842,31 @@
         shareText: "Aquí está la tarjeta de contacto de Victor Saint Hilaire.",
         linkCopied: "Enlace copiado",
         copyError: "Copia el enlace desde la barra del navegador",
+        bookingTitle: "Agendar recogida",
+        bookingText: "Llena tus datos y abriremos WhatsApp con el mensaje listo para enviar.",
+        bookingNameLabel: "Nombre",
+        bookingNamePlaceholder: "Tu nombre completo",
+        bookingPhoneLabel: "Teléfono",
+        bookingPhonePlaceholder: "Tu número de teléfono",
+        bookingAddressLabel: "Dirección de recogida",
+        bookingAddressPlaceholder: "Ej: 350 5th Ave, New York, NY",
+        addressHint: "Escribe y selecciona una dirección en EE.UU.",
+        addressSearching: "Buscando direcciones...",
+        addressNoResults: "No hay resultados. Escribe la dirección completa.",
+        addressSuggestionsLabel: "Sugerencias de dirección",
+        bookingDateLabel: "Día",
+        bookingTimeLabel: "Hora",
+        bookingSubmit: "Enviar",
         paymentsTitle: "Pagos y propinas",
         zelleHint: "347 647 8838",
         zelleAria: "Enviar pago por Zelle al 347 647 8838",
-        cashAppHint: "Envía en segundos",
-        cashAppAria: "Enviar pago por Cash App",
+        cashAppHint: "$victor29dsp",
+        cashAppAria: "Enviar pago por Cash App a $victor29dsp",
         contactTitle: "Comunicación",
         whatsappHint: "Escríbeme directamente",
         whatsappAria: "Iniciar chat de WhatsApp con Victor Saint Hilaire",
+        emailLabel: "Correo electrónico",
+        emailAria: "Enviar correo a victor29dsp@gmail.com",
         whatsappUrl: "https://wa.me/13476478838?text=Hola%20Victor%2C%20me%20gustar%C3%ADa%20coordinar%20un%20viaje.",
         qrTitle: "Comparte mi contacto",
         qrText: "Escanea este código para abrir esta tarjeta digital.",
@@ -501,10 +875,17 @@
       },
       en: {
         pageTitle: "Victor Saint Hilaire | Private Driver",
+        pageDescription: "Contact card for Victor Saint Hilaire, your trusted private driver.",
         cardLabel: "Digital card for Victor Saint Hilaire",
         languageSelector: "Language selector",
+        languageTitle: "Language",
+        avatarAlt: "Photo of Victor Saint Hilaire",
+        contactFile: "contacto-en.vcf",
+        fieldRequired: "Please fill out this field.",
+        phoneRequired: "Enter a valid phone number.",
         eyebrow: "Premium service",
         subtitle: "Your trusted private driver",
+        licenseLabel: "TLC Driver License",
         saveContact: "Save contact",
         sharePage: "Share page",
         shareHint: "Send this card to someone else",
@@ -513,14 +894,31 @@
         shareText: "Here is Victor Saint Hilaire's contact card.",
         linkCopied: "Link copied",
         copyError: "Copy the link from the browser bar",
+        bookingTitle: "Schedule pickup",
+        bookingText: "Fill in your details and we will open WhatsApp with your message ready to send.",
+        bookingNameLabel: "Name",
+        bookingNamePlaceholder: "Your full name",
+        bookingPhoneLabel: "Phone",
+        bookingPhonePlaceholder: "Your phone number",
+        bookingAddressLabel: "Pickup address",
+        bookingAddressPlaceholder: "Ex: 350 5th Ave, New York, NY",
+        addressHint: "Type and select a U.S. address.",
+        addressSearching: "Searching addresses...",
+        addressNoResults: "No results found. Type the full address.",
+        addressSuggestionsLabel: "Address suggestions",
+        bookingDateLabel: "Date",
+        bookingTimeLabel: "Time",
+        bookingSubmit: "Send",
         paymentsTitle: "Payments and tips",
         zelleHint: "347 647 8838",
         zelleAria: "Send Zelle payment to 347 647 8838",
-        cashAppHint: "Send in seconds",
-        cashAppAria: "Send payment with Cash App",
+        cashAppHint: "$victor29dsp",
+        cashAppAria: "Send Cash App payment to $victor29dsp",
         contactTitle: "Communication",
         whatsappHint: "Message me directly",
         whatsappAria: "Start a WhatsApp chat with Victor Saint Hilaire",
+        emailLabel: "Email",
+        emailAria: "Send email to victor29dsp@gmail.com",
         whatsappUrl: "https://wa.me/13476478838?text=Hi%20Victor%2C%20I%20would%20like%20to%20schedule%20a%20ride.",
         qrTitle: "Share my contact",
         qrText: "Scan this code to open this digital card.",
@@ -529,11 +927,25 @@
       }
     };
 
+    var WHATSAPP_NUMBER = "13476478838";
+    var US_ADDRESS_BBOX = "-124.848974,24.396308,-66.885444,49.384358";
+    var NYC_LAT = 40.7128;
+    var NYC_LON = -74.006;
+
+    var addressAutocompleteController = null;
+    var addressAutocompleteTimer = null;
+    var addressSelectedFromList = false;
+
     function setLanguage(language) {
       var dictionary = translations[language] || translations.es;
 
       document.documentElement.lang = language;
       document.title = dictionary.pageTitle;
+
+      var metaDescription = document.getElementById("meta-description");
+      if (metaDescription && dictionary.pageDescription) {
+        metaDescription.setAttribute("content", dictionary.pageDescription);
+      }
 
       document.querySelectorAll("[data-i18n]").forEach(function (element) {
         var key = element.getAttribute("data-i18n");
@@ -550,6 +962,20 @@
         element.setAttribute("href", dictionary[key]);
       });
 
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(function (element) {
+        var key = element.getAttribute("data-i18n-placeholder");
+        element.setAttribute("placeholder", dictionary[key]);
+      });
+
+      document.querySelectorAll("[data-i18n-alt]").forEach(function (element) {
+        var key = element.getAttribute("data-i18n-alt");
+        element.setAttribute("alt", dictionary[key]);
+      });
+
+      document.querySelectorAll("[data-i18n-validity]").forEach(function (element) {
+        element.setCustomValidity("");
+      });
+
       document.querySelectorAll("[data-language]").forEach(function (button) {
         var isActive = button.getAttribute("data-language") === language;
         button.classList.toggle("is-active", isActive);
@@ -561,6 +987,245 @@
       } catch (error) {
         // Browsers can block storage in private contexts; the selector still works.
       }
+
+      updateAddressSuggestionLabels();
+    }
+
+    function updateAddressSuggestionLabels() {
+      var list = document.getElementById("address-suggestions");
+      var input = document.getElementById("booking-address");
+
+      if (!list || !input) {
+        return;
+      }
+
+      list.setAttribute("aria-label", translations[getCurrentLanguage()].addressSuggestionsLabel);
+
+      if (!list.hidden && list.querySelector(".address-suggestion-status")) {
+        var query = input.value.trim();
+
+        if (query.length >= 3) {
+          showAddressStatus(list.querySelector(".address-suggestion-status").dataset.status || "searching");
+        }
+      }
+    }
+
+    function formatUSAddress(properties) {
+      var streetLine = [properties.housenumber, properties.street].filter(Boolean).join(" ").trim();
+
+      if (!streetLine && properties.name) {
+        streetLine = properties.name;
+      }
+
+      var city = properties.city || properties.locality || properties.district || properties.county || "";
+      var state = properties.state || "";
+      var postcode = properties.postcode || "";
+      var cityLine = city;
+
+      if (state) {
+        cityLine = cityLine ? cityLine + ", " + state : state;
+      }
+
+      if (postcode) {
+        cityLine = cityLine ? cityLine + " " + postcode : postcode;
+      }
+
+      return [streetLine, cityLine].filter(Boolean).join(", ");
+    }
+
+    function buildAddressMeta(properties) {
+      var city = properties.city || properties.locality || properties.district || "";
+      var state = properties.state || "";
+      var meta = [city, state].filter(Boolean).join(", ");
+
+      if (properties.country) {
+        meta = meta ? meta + " · " + properties.country : properties.country;
+      }
+
+      return meta;
+    }
+
+    function showAddressStatus(status) {
+      var list = document.getElementById("address-suggestions");
+      var input = document.getElementById("booking-address");
+      var dictionary = translations[getCurrentLanguage()];
+
+      if (!list || !input) {
+        return;
+      }
+
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+
+      var message = status === "searching" ? dictionary.addressSearching : dictionary.addressNoResults;
+      list.innerHTML = "";
+
+      var item = document.createElement("div");
+      item.className = "address-suggestion-status";
+      item.dataset.status = status;
+      item.textContent = message;
+      list.appendChild(item);
+    }
+
+    function hideAddressSuggestions() {
+      var list = document.getElementById("address-suggestions");
+      var input = document.getElementById("booking-address");
+
+      if (!list || !input) {
+        return;
+      }
+
+      list.hidden = true;
+      list.innerHTML = "";
+      input.setAttribute("aria-expanded", "false");
+    }
+
+    function renderAddressSuggestions(features) {
+      var list = document.getElementById("address-suggestions");
+      var input = document.getElementById("booking-address");
+
+      if (!list || !input) {
+        return;
+      }
+
+      list.innerHTML = "";
+
+      if (!features.length) {
+        showAddressStatus("empty");
+        return;
+      }
+
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+
+      features.forEach(function (feature) {
+        var properties = feature.properties || {};
+        var formatted = formatUSAddress(properties);
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "address-suggestion";
+        button.setAttribute("role", "option");
+        button.dataset.address = formatted;
+
+        var title = document.createElement("span");
+        title.textContent = formatted || properties.name || "";
+        button.appendChild(title);
+
+        var meta = buildAddressMeta(properties);
+        if (meta) {
+          var metaLine = document.createElement("span");
+          metaLine.className = "address-suggestion-meta";
+          metaLine.textContent = meta;
+          button.appendChild(metaLine);
+        }
+
+        button.addEventListener("mousedown", function (event) {
+          event.preventDefault();
+        });
+
+        button.addEventListener("click", function () {
+          input.value = button.dataset.address;
+          addressSelectedFromList = true;
+          hideAddressSuggestions();
+          input.focus();
+        });
+
+        list.appendChild(button);
+      });
+    }
+
+    function fetchAddressSuggestions(query) {
+      if (addressAutocompleteController) {
+        addressAutocompleteController.abort();
+      }
+
+      addressAutocompleteController = new AbortController();
+      showAddressStatus("searching");
+
+      var url = "https://photon.komoot.io/api/?q=" + encodeURIComponent(query)
+        + "&limit=7"
+        + "&lang=en"
+        + "&bbox=" + US_ADDRESS_BBOX
+        + "&lat=" + NYC_LAT
+        + "&lon=" + NYC_LON;
+
+      fetch(url, {
+        signal: addressAutocompleteController.signal
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Address lookup failed");
+          }
+
+          return response.json();
+        })
+        .then(function (data) {
+          var features = (data.features || []).filter(function (feature) {
+            var countryCode = ((feature.properties || {}).countrycode || "").toLowerCase();
+            return countryCode === "us";
+          });
+
+          renderAddressSuggestions(features);
+        })
+        .catch(function (error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+
+          showAddressStatus("empty");
+        });
+    }
+
+    function setupAddressAutocomplete() {
+      var input = document.getElementById("booking-address");
+      var list = document.getElementById("address-suggestions");
+
+      if (!input || !list) {
+        return;
+      }
+
+      list.setAttribute("aria-label", translations[getCurrentLanguage()].addressSuggestionsLabel);
+
+      input.addEventListener("input", function () {
+        addressSelectedFromList = false;
+        var query = input.value.trim();
+
+        if (addressAutocompleteTimer) {
+          window.clearTimeout(addressAutocompleteTimer);
+        }
+
+        if (query.length < 3) {
+          hideAddressSuggestions();
+          return;
+        }
+
+        addressAutocompleteTimer = window.setTimeout(function () {
+          fetchAddressSuggestions(query);
+        }, 320);
+      });
+
+      input.addEventListener("blur", function () {
+        window.setTimeout(function () {
+          if (!addressSelectedFromList) {
+            hideAddressSuggestions();
+          }
+
+          addressSelectedFromList = false;
+        }, 180);
+      });
+
+      input.addEventListener("focus", function () {
+        var query = input.value.trim();
+
+        if (query.length >= 3 && !list.hidden && list.children.length) {
+          input.setAttribute("aria-expanded", "true");
+          return;
+        }
+
+        if (query.length >= 3) {
+          fetchAddressSuggestions(query);
+        }
+      });
     }
 
     function getCurrentLanguage() {
@@ -610,9 +1275,134 @@
       showShareMessage(dictionary.copyError);
     }
 
+    function isMobileDevice() {
+      return window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+    }
+
+    function openWhatsApp(url) {
+      if (isMobileDevice()) {
+        window.location.href = url;
+        return;
+      }
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function validatePhoneInput(input) {
+      var digits = input.value.replace(/\D/g, "");
+
+      if (digits.length < 7) {
+        input.setCustomValidity(translations[getCurrentLanguage()].phoneRequired);
+        return false;
+      }
+
+      input.setCustomValidity("");
+      return true;
+    }
+
+    function scrollFieldIntoView(field) {
+      window.setTimeout(function () {
+        field.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 120);
+    }
+
+    function formatBookingDate(dateValue, language) {
+      if (!dateValue) {
+        return "";
+      }
+
+      var parts = dateValue.split("-");
+      var date = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+
+      return date.toLocaleDateString(language === "en" ? "en-US" : "es-ES", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+
+    function formatBookingTime(timeValue, language) {
+      if (!timeValue) {
+        return "";
+      }
+
+      var parts = timeValue.split(":");
+      var date = new Date();
+      date.setHours(Number(parts[0]), Number(parts[1]), 0, 0);
+
+      return date.toLocaleTimeString(language === "en" ? "en-US" : "es-ES", {
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function buildBookingMessage(formData, language) {
+      var name = formData.get("name").trim();
+      var phone = formData.get("phone").trim();
+      var address = formData.get("address").trim();
+      var date = formatBookingDate(formData.get("date"), language);
+      var time = formatBookingTime(formData.get("time"), language);
+
+      if (language === "en") {
+        return [
+          "Hi Victor, I would like to schedule a pickup.",
+          "",
+          "Name: " + name,
+          "Phone: " + phone,
+          "Pickup address: " + address,
+          "Date: " + date,
+          "Time: " + time
+        ].join("\n");
+      }
+
+      return [
+        "Hola Victor, quiero agendar una recogida.",
+        "",
+        "Nombre: " + name,
+        "Teléfono: " + phone,
+        "Dirección de recogida: " + address,
+        "Día: " + date,
+        "Hora: " + time
+      ].join("\n");
+    }
+
+    function submitBooking(event) {
+      event.preventDefault();
+
+      var form = event.currentTarget;
+      var phoneInput = form.querySelector("#booking-phone");
+
+      if (phoneInput && !validatePhoneInput(phoneInput)) {
+        phoneInput.reportValidity();
+        scrollFieldIntoView(phoneInput);
+        return;
+      }
+
+      if (!form.reportValidity()) {
+        var firstInvalid = form.querySelector(":invalid");
+
+        if (firstInvalid) {
+          scrollFieldIntoView(firstInvalid);
+        }
+
+        return;
+      }
+
+      var formData = new FormData(form);
+      var language = getCurrentLanguage();
+      var message = buildBookingMessage(formData, language);
+      var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+
+      openWhatsApp(whatsappUrl);
+    }
+
     window.addEventListener("DOMContentLoaded", function () {
       var target = document.getElementById("qrcode");
       var shareButton = document.getElementById("share-button");
+      var bookingForm = document.getElementById("booking-form");
+      var bookingDate = document.getElementById("booking-date");
+      var bookingPhone = document.getElementById("booking-phone");
       var savedLanguage = "es";
 
       try {
@@ -630,6 +1420,43 @@
       if (shareButton) {
         shareButton.addEventListener("click", sharePage);
       }
+
+      if (bookingForm) {
+        bookingForm.addEventListener("submit", submitBooking);
+
+        bookingForm.querySelectorAll("[data-i18n-validity]").forEach(function (input) {
+          input.addEventListener("invalid", function () {
+            if (input.id === "booking-phone") {
+              validatePhoneInput(input);
+              return;
+            }
+
+            var key = input.getAttribute("data-i18n-validity");
+            var message = translations[getCurrentLanguage()][key] || "";
+            input.setCustomValidity(message);
+          });
+
+          input.addEventListener("input", function () {
+            input.setCustomValidity("");
+          });
+
+          input.addEventListener("focus", function () {
+            scrollFieldIntoView(input);
+          });
+        });
+      }
+
+      if (bookingPhone) {
+        bookingPhone.addEventListener("blur", function () {
+          validatePhoneInput(bookingPhone);
+        });
+      }
+
+      if (bookingDate) {
+        bookingDate.min = new Date().toISOString().split("T")[0];
+      }
+
+      setupAddressAutocomplete();
 
       setLanguage(savedLanguage);
 
