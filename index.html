@@ -436,6 +436,40 @@
       justify-content: center;
     }
 
+    .send-method-picker {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .send-method-picker[hidden] {
+      display: none !important;
+    }
+
+    .send-method-title {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .send-method-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .send-method-grid .button {
+      min-height: 54px;
+      justify-content: center;
+    }
+
+    .send-method-grid .button-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .address-field-wrap {
       position: relative;
     }
@@ -744,6 +778,13 @@
             </div>
             <div class="booking-form-footer">
               <button class="button button-primary booking-submit" type="submit" data-i18n="bookingSubmit">Enviar</button>
+              <div class="send-method-picker" id="send-method-picker" hidden>
+                <p class="send-method-title" data-i18n="sendMethodTitle">¿Cómo quieres enviarlo?</p>
+                <div class="send-method-grid">
+                  <button class="button button-primary" type="button" id="send-via-sms" data-i18n="sendViaSms">Mensaje de texto</button>
+                  <button class="button" type="button" id="send-via-whatsapp" data-i18n="sendViaWhatsapp">WhatsApp</button>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -857,6 +898,9 @@
         bookingDateLabel: "Día",
         bookingTimeLabel: "Hora",
         bookingSubmit: "Enviar",
+        sendMethodTitle: "¿Cómo quieres enviarlo?",
+        sendViaSms: "Mensaje de texto",
+        sendViaWhatsapp: "WhatsApp",
         paymentsTitle: "Pagos y propinas",
         zelleHint: "347 647 8838",
         zelleAria: "Enviar pago por Zelle al 347 647 8838",
@@ -909,6 +953,9 @@
         bookingDateLabel: "Date",
         bookingTimeLabel: "Time",
         bookingSubmit: "Send",
+        sendMethodTitle: "How would you like to send it?",
+        sendViaSms: "Text message",
+        sendViaWhatsapp: "WhatsApp",
         paymentsTitle: "Payments and tips",
         zelleHint: "347 647 8838",
         zelleAria: "Send Zelle payment to 347 647 8838",
@@ -935,6 +982,7 @@
     var addressAutocompleteController = null;
     var addressAutocompleteTimer = null;
     var addressSelectedFromList = false;
+    var pendingBookingMessage = "";
 
     function setLanguage(language) {
       var dictionary = translations[language] || translations.es;
@@ -1288,6 +1336,41 @@
       window.open(url, "_blank", "noopener,noreferrer");
     }
 
+    function buildSmsUrl(message) {
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      var separator = isIOS ? "&" : "?";
+
+      return "sms:+" + WHATSAPP_NUMBER + separator + "body=" + encodeURIComponent(message);
+    }
+
+    function openSms(url) {
+      window.location.href = url;
+    }
+
+    function hideSendMethodPicker() {
+      var picker = document.getElementById("send-method-picker");
+
+      if (picker) {
+        picker.hidden = true;
+      }
+
+      pendingBookingMessage = "";
+    }
+
+    function showSendMethodPicker(message) {
+      var picker = document.getElementById("send-method-picker");
+
+      pendingBookingMessage = message;
+
+      if (!picker) {
+        openSms(buildSmsUrl(message));
+        return;
+      }
+
+      picker.hidden = false;
+      picker.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
     function validatePhoneInput(input) {
       var digits = input.value.replace(/\D/g, "");
 
@@ -1392,9 +1475,8 @@
       var formData = new FormData(form);
       var language = getCurrentLanguage();
       var message = buildBookingMessage(formData, language);
-      var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
 
-      openWhatsApp(whatsappUrl);
+      showSendMethodPicker(message);
     }
 
     window.addEventListener("DOMContentLoaded", function () {
@@ -1403,6 +1485,8 @@
       var bookingForm = document.getElementById("booking-form");
       var bookingDate = document.getElementById("booking-date");
       var bookingPhone = document.getElementById("booking-phone");
+      var sendViaSms = document.getElementById("send-via-sms");
+      var sendViaWhatsapp = document.getElementById("send-via-whatsapp");
       var savedLanguage = "es";
 
       try {
@@ -1423,6 +1507,7 @@
 
       if (bookingForm) {
         bookingForm.addEventListener("submit", submitBooking);
+        bookingForm.addEventListener("input", hideSendMethodPicker);
 
         bookingForm.querySelectorAll("[data-i18n-validity]").forEach(function (input) {
           input.addEventListener("invalid", function () {
@@ -1449,6 +1534,27 @@
       if (bookingPhone) {
         bookingPhone.addEventListener("blur", function () {
           validatePhoneInput(bookingPhone);
+        });
+      }
+
+      if (sendViaSms) {
+        sendViaSms.addEventListener("click", function () {
+          if (!pendingBookingMessage) {
+            return;
+          }
+
+          openSms(buildSmsUrl(pendingBookingMessage));
+        });
+      }
+
+      if (sendViaWhatsapp) {
+        sendViaWhatsapp.addEventListener("click", function () {
+          if (!pendingBookingMessage) {
+            return;
+          }
+
+          var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(pendingBookingMessage);
+          openWhatsApp(whatsappUrl);
         });
       }
 
